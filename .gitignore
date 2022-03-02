@@ -1,10 +1,10 @@
-/sql-scripts/*
-!/sql-scripts/README.md
+/sql-scripts
 /node_modules
 /csvs
-!/csvs/README.md
-
 /.idea
 
 package-lock.json
 inopack.sql
+!/csvs/README.md
+!/sql-scripts/README.md
+reporte.xlsx

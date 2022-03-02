@@ -1,4 +1,3 @@
-
 const mysql = require('mysql2/promise');
 const fs = require('fs/promises')
 const ObjectsToCsv = require('objects-to-csv')
@@ -18,16 +17,19 @@ const CSV_DIR = "csvs";
     database: DATABASE,
   });
 
-  const files = await fs.readdir(`./${SQL_SCRIPT_DIR}`)
+  const files = (await fs.readdir(`./${SQL_SCRIPT_DIR}`))
+    .filter((f) => {
+      return f.split(".")[1] === "sql";
+    })
 
 
   for (const file of files) {
-    const fileHandle = await fs.open(`./${SQL_SCRIPT_DIR}/${file}`)
+    const fileHandle = await fs.open(`./${SQL_SCRIPT_DIR}/${file}`, 'r')
     const query = await fileHandle.readFile('utf-8')
     const [result, ] = await connection.execute(query)
     const csv = new ObjectsToCsv(result)
-    const filenameWithoutExtension = file.split('.')[0]
-    await csv.toDisk(`./${CSV_DIR}/${filenameWithoutExtension}.csv`)
+    const filename_without_extension = file.split('.')[0]
+    await csv.toDisk(`./${CSV_DIR}/${filename_without_extension}.csv`, { append: false})
     await fileHandle.close()
   }
 
