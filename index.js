@@ -9,7 +9,6 @@ const DATABASE = "inopack";
 const SQL_SCRIPT_DIR = "sql-scripts";
 const CSV_DIR = "csvs";
 
-
 (async function () {
   const connection = await mysql.createConnection({
     user: USERNAME,
