@@ -1,0 +1,10 @@
+/sql-scripts/*
+!/sql-scripts/README.md
+/node_modules
+/csvs
+!/csvs/README.md
+
+/.idea
+
+package-lock.json
+inopack.sql
